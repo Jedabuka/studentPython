@@ -3,9 +3,14 @@ import math
 
 class Figure:
     sides_count = 0
+    list_sides = []
 
-    def __init__(self, __sides: int, __color: (int, int, int), filled: bool = False):
-        pass
+    def __init__(self, __color: (int, int, int), *__sides: int, filled: bool = False):
+        self.__sides = __sides
+        self.__color = __color
+        self.filled = filled
+        for i in __sides:
+            Figure.list_sides.append(i)
 
     def get_color(self):   # список RGB цветов
         return
@@ -42,49 +47,45 @@ class Figure:
 class Circle(Figure):
     sides_count = 1
 
-    def __init__(self, color_cir: (int, int, int), side_cir, __radius):
-        self.color_cir = color_cir
-        self.side_cir = side_cir
-        self.__radius = __radius
-
-
+    def __init__(self, __color: (int, int, int), *__sides: int, filled: bool = False):
+        super().__init__(__color, __sides)
+        self.__color = __color
+        self.__sides = __sides
+        self.__radius = Circle.get_radius(self)
+        self.filled = filled
 
     def get_radius(self):
-        __radius = round(side_cir / (2 * 3.14), 2)
-        return __radius
-
+        self.__radius = round(self.__sides / (2 * 3.14), 2)
+        return self.__radius
 
     def get_square_circle(self):
-        square_cir = round(3.14 * __radius ** 2, 2)
-        return square_cir
+        square_cir = round(3.14 * self.__radius ** 2, 2)
+        return self.square_cir
 
 
-class Triangle(Figure):
-    sides_count = 3
-
-    def __init__(self, color_tri: (int, int, int), side_1: int, side_2: int, side_3: int, __height):
-        self.color_tri = color_tri
-        self.side_1 = side_1
-        self.side_2 = side_2
-        self.side_3 = side_3
-        self.__height = __height
-
-    def get_square_triangle(self):
-        half_meter = (side_1 + side_2 + side_3) / 2
-        square_tri = math.sqrt((half_meter * (half_meter - side_1) * (half_meter - side_2) * (half_meter - side_3)))
-        square_tri = round(square_tri, 2)
-        return square_tri
-
-    def get_height(self):
-        height_tri = 2 * square_tri / side_2
-        return height_tri
+# class Triangle(Figure):
+#     sides_count = 3
+#
+#     def __init__(self, __color: (int, int, int), *__sides: int, __height, filled: bool = False):
+#         super().__init__(__color, __sides)
+#         self.__color = __color
+#         self.__sides = __sides
+#         self.filled = filled
+#         self.__height = __height
+#
+#     def get_square_triangle(self):
+#         half_meter = (side_1 + side_2 + side_3) / 2
+#         square_tri = math.sqrt((half_meter * (half_meter - side_1) * (half_meter - side_2) * (half_meter - side_3)))
+#         square_tri = round(square_tri, 2)
+#         return square_tri
+#
+#     def get_height(self):
+#         height_tri = 2 * square_tri / side_2
+#         return height_tri
 
 
 
 class Cube(Figure):
     pass
 
-
-print(Circle.mro())
-print(Triangle.mro())
-print(Cube.mro())
+circle1 = Circle((200, 200, 100), 10)
