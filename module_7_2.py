@@ -1,13 +1,14 @@
 def custom_write(file_name, strings):
     strings_positions = {}
     lines = 0
-    file = open(file_name, 'a', encoding='utf-8')
     for string in strings:
+        file = open(file_name, 'a', encoding='utf-8')
         current_tell = file.tell()
         lines += 1
         strings_positions.update({(lines, current_tell): string})
         file.write(f'{string}\n')
-
+        file.close()
+        
     return strings_positions
 
 
