@@ -52,11 +52,3 @@ th1.join()
 th2.join()
 
 print(f'Итоговый баланс: {bk.balance}')
-
-
-
-
-
-
-
-
