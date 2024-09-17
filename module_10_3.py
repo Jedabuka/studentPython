@@ -18,7 +18,6 @@ class Bank:
                 print(f'Пополнение: {number}. Баланс: {self.balance}')
 
             elif self.lock.locked() and self.balance < 500:
-                self.lock.release()
                 self.balance += number
                 print(f'Пополнение: {number}. Баланс: {self.balance}')
 
