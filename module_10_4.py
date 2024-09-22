@@ -1,7 +1,7 @@
 from threading import Thread
 from time import sleep
 from random import randint
-import queue
+from queue import Queue
 
 
 class Table:
@@ -22,7 +22,7 @@ class Guest(Thread):
 class Cafe:
     def __init__(self, *tables):
         self.tables = tables
-        self.queue = queue.Queue()
+        self.queue = Queue()
 
     def guest_arrival(self, *guests):
         for guest in guests:
