@@ -1,5 +1,5 @@
-from pprint import pprint
 import inspect
+import sys
 
 
 class MyClass:
@@ -19,9 +19,10 @@ class MyClass:
             else:
                 attributes.append(attr)
                 intro_dict.update({'attributes': attributes})
-        intro_dict.update({'module': inspect.getmodule(self.obj)})
-
-
+        intro_dict.update({'module': inspect.getmodule(MyClass)})
+        intro_dict.update({'builtin': inspect.isbuiltin(self.obj)})
+        intro_dict.update({'id': id(self.obj)})
+        intro_dict.update({'size': sys.getsizeof(self.obj)})
 
         return print(intro_dict)
 
