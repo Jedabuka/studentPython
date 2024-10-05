@@ -1,5 +1,4 @@
 import unittest
-from unittest import TestCase
 
 
 class Runner:
@@ -17,7 +16,7 @@ class Runner:
         return self.name
 
 
-class RunnerTest(TestCase):
+class RunnerTest(unittest.TestCase):
 
     def test_walk(self):
         runner = Runner('Миша')
