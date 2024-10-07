@@ -1,5 +1,3 @@
-import unittest
-
 
 class Runner:
     def __init__(self, name, speed=5):
@@ -40,56 +38,3 @@ class Tournament:
                     self.participants.remove(participant)
 
         return finishers
-
-
-class TournamentTest(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        cls.all_result = {}
-
-    def setUp(self):
-        self.runner1 = Runner('Усэйн', speed=10)
-        self.runner2 = Runner('Андрей', speed=9)
-        self.runner3 = Runner('Ник', speed=3)
-
-    def test_tournament(self):
-        tour1 = Tournament(90, self.runner1, self.runner3)
-        res = tour1.start()
-        self.all_result[1] = res
-        runners = list(res.values())
-        self.assertTrue(runners[-1] == self.runner3)
-
-    def test_tournament1(self):
-        tour2 = Tournament(90, self.runner1, self.runner3)
-        res = tour2.start()
-        self.all_result[2] = res
-        runners = list(res.values())
-        self.assertTrue(runners[-1] == self.runner3)
-
-    def test_tournament2(self):
-        tour3 = Tournament(90, self.runner1, self.runner2, self.runner3)
-        res = tour3.start()
-        self.all_result[3] = res
-        runners = list(res.values())
-        self.assertTrue(runners[-1] == self.runner3)
-
-    @classmethod
-    def tearDownClass(cls):
-        for result in cls.all_result.values():
-            print({place: str(runner) for place, runner in result.items()})
-
-
-if __name__ == '__main__':
-    unittest.main()
-
-
-
-
-
-
-
-
-
-
-
