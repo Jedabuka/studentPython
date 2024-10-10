@@ -3,7 +3,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher.filters.state import State, StatesGroup
 import asyncio
 
-api = ''
+api = '8024651813:AAGs9IpdG4iUOfydyqjN9SN-1c3R81uCjIM'
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
@@ -57,8 +57,9 @@ async def set_activity(message, state):
                          '•  Высокая активность: A = 1,725.\n'
                          '•  Экстра-активность: A = 1,9 (под эту категорию обычно подпадают люди,\n'
                          'занимающиеся, например, тяжелой атлетикой, или другими силовыми\n'
-                         'видами спорта с ежедневными тренировками, а также те, кто выполняет\n'
-                         'тяжелую физическую работу).\n'
+                         'видами спорта с ежедневными тренировками, а также те, кто\n'
+                         'выполняет тяжелую физическую\n'
+                         'работу).\n'
                          '\n'
                          '(введите цифру активности):')
     await UserState.activity.set()
