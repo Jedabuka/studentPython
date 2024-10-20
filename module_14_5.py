@@ -8,7 +8,7 @@ import asyncio
 import sqlite3
 
 
-api = '8024651813:AAGs9IpdG4iUOfydyqjN9SN-1c3R81uCjIM'
+api = ''
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
