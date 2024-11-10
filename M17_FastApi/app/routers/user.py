@@ -28,20 +28,23 @@ async def user_by_id(db: Annotated[Session, Depends(get_db)], user_id: int):
 
 @router.post('/create')
 async def create_user(db: Annotated[Session, Depends(get_db)], new_user: CreateUser):
-    db.execute(insert(User).values(username=new_user.username, firstname=new_user.firstname, lastname=new_user.lastname,
-                                   age=new_user.age, slug=slugify(new_user.username)))
-    db.commit()
-    return {'status code': status.HTTP_201_CREATED, 'transaction': 'Successful'}
+    user = db.scalar(select(User).where(User.username == new_user.username))
+    if user:
+        raise HTTPException(status_code=status.HTTP_302_FOUND, detail='Sorry, User already exists')
+
+    else:
+        db.execute(insert(User).values(username=new_user.username, firstname=new_user.firstname,
+                                       lastname=new_user.lastname, age=new_user.age, slug=slugify(new_user.username)))
+        db.commit()
+        return {'status_code': status.HTTP_201_CREATED, 'transaction': 'Successful'}
 
 
 @router.put('/update')
 async def update_user(db: Annotated[Session, Depends(get_db)], user_id: int, change_user: UpdateUser):
     user = db.scalar(select(User).where(User.id == user_id))
     if user:
-        db.execute(update(User).where(User.id == user_id).values(username=change_user.username,
-                                                                 firstname=change_user.firstname,
-                                                                 lastname=change_user.lastname, age=change_user.age,
-                                                                 slug=slugify(change_user.username)))
+        db.execute(update(User).where(User.id == user_id).values(firstname=change_user.firstname,
+                                                                 lastname=change_user.lastname, age=change_user.age))
         db.commit()
         return {'status_code': status.HTTP_200_OK, 'transaction': 'User update is successful!'}
 
