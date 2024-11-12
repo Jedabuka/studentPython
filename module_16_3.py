@@ -20,7 +20,7 @@ async def new_user(username: Annotated[str, Path(min_length=5, max_length=20, de
 
 
 @app.put('/user/{user_id}/{username}/{age}')
-async def update_user(user_id: Annotated[str, Path(ge=1, le=200, description='Enter User ID', example=111)],
+async def update_user(user_id: Annotated[int, Path(ge=1, le=200, description='Enter User ID', example=111)],
                       username: Annotated[str, Path(min_length=5, max_length=20, description='Enter username',
                                                     example='UrbanUser')],
                       age: Annotated[int, Path(ge=18, le=120, description='Enter age', example='20')]) -> str:
@@ -29,7 +29,7 @@ async def update_user(user_id: Annotated[str, Path(ge=1, le=200, description='En
 
 
 @app.delete('/user/{user_id}')
-async def user_del(user_id: Annotated[str, Path(ge=1, le=200, description='Enter User ID', example=111)]) -> str:
+async def user_del(user_id: Annotated[int, Path(ge=1, le=200, description='Enter User ID', example=111)]) -> str:
     users_db.pop(user_id)
     return f'User {user_id} has been deleted'
 
